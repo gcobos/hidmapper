@@ -1,0 +1,100 @@
+
+# List of gestures for fingers. Feel free to implement your own!
+# Tap id's consist on WHO does WHAT over WHAT
+# NOTE: All gesture id's must be unique
+
+r_hand_tap_index_vs_thumb:
+    name: "Right hand taps index finger against thumb"
+    icon: r_hand_tap_index_vs_thumb.gif
+
+r_hand_tap_middle_vs_thumb:
+    name: "Right hand taps middle finger against thumb"
+    icon: r_hand_tap_middle_vs_thumb.gif
+
+r_hand_tap_ring_vs_thumb:
+    name: "Right hand taps ring finger against thumb"
+    icon: r_hand_tap_ring_vs_thumb.gif
+
+r_hand_tap_pinky_vs_thumb:
+    name: "Right hand taps pinky (little) finger against thumb"
+    icon: r_hand_tap_pinky_vs_thumb.gif
+
+r_hand_tap_index_middle_vs_thumb:
+    name: "Right hand taps index and middle fingers against thumb"
+    icon: r_hand_tap_index_middle_vs_thumb.gif
+    require: [ r_hand_tap_index_vs_thumb, r_hand_tap_middle_vs_thumb ]
+
+r_hand_tap_middle_ring_vs_thumb:
+    name: "Right hand taps middle and ring fingers against thumb"
+    icon: r_hand_tap_middle_ring_vs_thumb.gif
+    require: [ r_hand_tap_middle_vs_thumb, r_hand_tap_ring_vs_thumb ]
+      
+r_hand_tap_ring_pinky_vs_thumb:
+    name: "Right hand taps ring and pinky fingers against thumb"
+    icon: r_hand_tap_ring_pinky_vs_thumb.gif
+    require: [ r_hand_tap_ring_vs_thumb, r_hand_tap_pinky_vs_thumb ]
+
+r_hand_tap_index_middle_ring_pinky_vs_thumb:
+    name: "Right hand taps index and middle with ring and pinky fingers against thumb"
+    icon: r_hand_tap_ring_pinky_vs_thumb.gif
+    require: [ r_hand_tap_ring_pinky_vs_thumb, r_hand_tap_index_middle_vs_thumb ]
+
+r_hand_tap_index_middle_ring_vs_thumb:
+    name: "Right hand taps index, middle and ring fingers against thumb"
+    icon: r_hand_tap_index_middle_ring_vs_thumb.gif
+    require: [ r_hand_tap_index_middle_vs_thumb, r_hand_tap_ring_vs_thumb ]
+
+r_hand_tap_index_pinky_vs_thumb:
+    name: "Right hand taps index and pinky fingers against thumb"
+    icon: r_hand_tap_index_pinky_vs_thumb.gif
+    require: [ r_hand_tap_index_vs_thumb, r_hand_tap_pinky_vs_thumb ]
+
+# Same with the left hand
+
+l_hand_tap_index_vs_thumb:
+    name: "Left hand taps index finger against thumb"
+    icon: l_hand_tap_index_vs_thumb.gif
+
+l_hand_tap_middle_vs_thumb:
+    name: "Left hand taps middle finger against thumb"
+    icon: l_hand_tap_middle_vs_thumb.gif
+
+l_hand_tap_ring_vs_thumb:
+    name: "Left hand taps ring finger against thumb"
+    icon: l_hand_tap_ring_vs_thumb.gif
+
+l_hand_tap_pinky_vs_thumb:
+    name: "Left hand taps pinky (little) finger against thumb"
+    icon: l_hand_tap_pinky_vs_thumb.gif
+
+l_hand_tap_index_middle_vs_thumb:
+    name: "Left hand taps index and middle fingers against thumb"
+    icon: l_hand_tap_index_middle_vs_thumb.gif
+    require: [ l_hand_tap_index_vs_thumb, l_hand_tap_middle_vs_thumb ]
+
+l_hand_tap_middle_ring_vs_thumb:
+    name: "Left hand taps middle and ring fingers against thumb"
+    icon: l_hand_tap_middle_ring_vs_thumb.gif
+    require: [ l_hand_tap_middle_vs_thumb, l_hand_tap_ring_vs_thumb ]
+      
+l_hand_tap_ring_pinky_vs_thumb:
+    name: "Left hand taps ring and pinky fingers against thumb"
+    icon: l_hand_tap_ring_pinky_vs_thumb.gif
+    require: [ l_hand_tap_ring_vs_thumb, l_hand_tap_pinky_vs_thumb ]
+
+l_hand_tap_index_middle_ring_pinky_vs_thumb:
+    name: "Left hand taps index and middle with ring and pinky fingers against thumb"
+    icon: l_hand_tap_ring_pinky_vs_thumb.gif
+    require: [ l_hand_tap_ring_pinky_vs_thumb, l_hand_tap_index_middle_vs_thumb ]
+
+l_hand_tap_index_middle_ring_vs_thumb:
+    name: "Left hand taps index, middle and ring fingers against thumb"
+    icon: l_hand_tap_index_middle_ring_vs_thumb.gif
+    require: [ l_hand_tap_index_middle_vs_thumb, l_hand_tap_ring_vs_thumb ]
+
+l_hand_tap_index_ring_vs_thumb:
+    name: "Left hand taps index and ring fingers against thumb"
+    icon: l_hand_tap_index_ring_vs_thumb.gif
+    require: [ l_hand_tap_index_vs_thumb, l_hand_tap_ring_vs_thumb ]
+
+    

@@ -1,0 +1,95 @@
+
+Defining a new device mapping
+
+As device, we can either specify /dev/input/eventX, but these numbers may change on reboot. Look into the /dev/input/by-id.
+I recommend to always use /dev/input/by-id/MyMouseName-event-mouse as device instead of the eventX files. Note that you'll
+find MyMouseName-mouse and MyMouseName-event-mouse, of which only the latter will work with evdev. Ignore the former.
+
+En cada instante que se recibe un set de gestures, los añade a la clase 'matcher', que los acumula hasta formar códigos completos
+y los devuelve como una lista que puede ser vacía, o contener el número de gestos que están completos, y que han sido borrados de la
+cola interna de 'matcher'.
+
+matcher = HIDMapperMatcher(profile_gestures) 
+
+La lista de gestures del profile, lleva la frequencia de uso de cada elemento, para determinar la probabilidad de acierto del matcher
+Internamente se define una cola cuya longitud debe ser múltiplo de la longitud del código más largo.
+
+matcher.set_prefix(set of gestures)
+gestures_matched = matcher.get_matched_elements()
+
+Primero, cada vez que se recibe un set de gestures, son añadidos como cambios en la secuencia
+Otros nodos autogenerados son:
+- Se añaden los nuevos gestos en el nodo anterior, borrando los gestos previos del nodo anterior (error previo-1)
+- Se añaden los nuevos gestos en el nodo anterior, borrando los gestos previos del nodo anterior (error previo-2)
+- Se añaden los nuevos gestos en el nodo anterior, borrando los gestos previos del nodo anterior (error previo-3)
+
+Se evalúan todos los posibles caminos desde el inicio del código (añadir punteros para saber dónde empieza un código y termina otro)
+Se cogen los mejores candidatos, y se ponen en un ranking con la probabilidad, y se devuelven junto con la marca de dónde empiezan
+y donde terminan en la cola, para poder saber dónde ha de empezar el siguiente código
+
+
+In a window frame defined by the longest possible code * 4, read the status of every event supported by the device, sorted 
+in the same way as provided by the device configuration file
+
+Every change in the events, generates a change in all of them, keeping the same value as they had, except the one(s) that change
+
+With those codes, of 1's and 0's, 
+
+Events release or press, makes a check for Gestures in the lattest n events
+Gestures are used together to form Codes
+Codes are assigned to output events
+
+Coger todos los cambios on releases y buscar códigos hacia atrás, tomando los tiempos también, para dar más prioridad a los
+que duren más
+
+Transformar todos los códigos a una secuencia por cada uno de los posibles eventos del interfaz, e intentar alinear la secuencia
+dada con esas secuencias
+
+-----------------------
+
+The piezo is connecting both wires, and in parallel with piezos, a resistance to keep the button not pressed
+
+One of the wires on the piezo goes directly to the skin, and thumb is connected to VCC, so when the fingertips
+touch themselves, the pull-up resistor (through skin) goes down of the piezos goes down
+
+
+TODO: Hacer el injector de eventos específico para eventos que vengan del interfaz
+
+TODO: Hacer el programa en GTK para definir perfiles: 
+
+Tab 1: Profiles (por defecto)
+
+Muestra una lista de profiles creados, y por cada uno se puede seleccionar, y se activa.
+
+Tab 2: Setup
+
+En este tab se muestra el setup general, por ejemplo, cuánto tiempo entre pulsación doble se considera bueno
+También se muestra una lista de perfiles creados, con la opción de añadir uno nuevo.
+
+Si se elige crear un nuevo perfil, se muestra un input con el nombre del perfil, y un check para decir si es
+para el usuario logeado o para todos los usuarios. A continuación se muestra una lista de todos los gestos
+dibujados, con checkboxs por cada uno, para seleccionarlo o deseleccionarlo. Después se pulsa siguiente, y
+entonces se muestra la lista de gestos, ordenados por la dificultad por defecto, y da la opción, por cada
+gesto, de modificar la dificultad.
+
+Después se pulsa siguiente y se muestra otra pantalla que da la opción de escoger los eventos a generar,
+seleccionándolos de una lista con todas las letras, números, fonemas, puntuación, teclas de función, escape,
+eventos de ratón, etc. Y algunos eventos especiales, como click en cuadrante 1, 2, 3, 4, y cosas así,
+necesarias para algunos de los perfiles.
+Cada vez que un evento es seleccionado, se muestra un slider horizontal (de 0.00 a 100.00) con la frecuencia de uso,
+configurable. En esta fase, también se da la posibilidad de cargar un archivo para sacar el histograma. Los
+archivos pueden ser en texto plano o de xmacro (el programa tiene que identificarlos y parsearlos). En caso de
+que algunos de los eventos en el fichero cargado ya estén en en la selección actual, se suman después de ser
+convertidos a porcentajes. Después el resultado se vuelve a convertir de 0.00 a 100.00
+
+Pulsando finalizar, se muestra una última pantalla con los gestos asociados a cada evento, que han sido 
+generados automáticamente, y un botón finalizar, o volver atrás.
+
+Cuando se elige editar un perfil, es el mismo recorrido, así que quizá un asistente no sea tan buena idea si
+no me deja ir directamente a la fase que quiero editar
+
+Tab 3: Test
+
+En este tab se muestra una lista de gestos para cada evento en el perfil activo. Por cada uno, hay un indicador
+que se enciende en verde cada vez que se hace un evento correctamente. También hay una caja de texto que muestra
+los eventos (otra vez tienes que pensar en cómo poner eventos generales en texto y que sea standard)

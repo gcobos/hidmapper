@@ -1,0 +1,10 @@
+Phoneset "spanish" redefined
+Phoneset "spanish" redefined
+lexicon spanish recreated
+LTS_Rules: spanish_downcase recreated
+LTS_Rules: spanish recreated
+LTS_Rules: spanish_syl recreated
+LTS_Rules: spanish.stress recreated
+LTS_Rules: spanish_weak_vowels recreated
+"Load server start ./festival_server.scm"
+val server started on port 1314

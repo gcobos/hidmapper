@@ -1,0 +1,104 @@
+#!/usr/bin/python
+
+import sys
+import fcntl
+import os
+
+from select import select
+from time import sleep
+
+#from gevent import monkey
+#monkey.patch_all(os=True,
+#    select=True,
+#    socket=True,
+#    thread=False,
+#    time=True)
+#from gevent import sleep
+#from gevent.select import select
+
+import speechd
+client = speechd.SSIPClient('test')
+#print("Starting1...")
+client.set_output_module('festival')
+client.set_language('es')
+client.set_punctuation(speechd.PunctuationMode.SOME)
+#print("Starting2...")
+
+#sleep(0)
+#print("Starting3...")
+
+def read_single_keypress():
+    """Waits for a single keypress on stdin.
+
+    This is a silly function to call if you need to do it a lot because it has
+    to store stdin's current setup, setup stdin for reading single keystrokes
+    then read the single keystroke then revert stdin back after reading the
+    keystroke.
+
+    Returns the character of the key that was pressed (zero on
+    KeyboardInterrupt which can happen when a signal gets handled)
+
+    """
+    import termios, fcntl, sys, os
+    fd = sys.stdin.fileno()
+    # save old state
+    flags_save = fcntl.fcntl(fd, fcntl.F_GETFL)
+    #attrs_save = termios.tcgetattr(fd)
+    # make raw - the way to do this comes from the termios(3) man page.
+    #attrs = list(attrs_save) # copy the stored version to update
+    # iflag
+    #attrs[0] &= ~(termios.IGNBRK | termios.BRKINT | termios.PARMRK 
+    #              | termios.ISTRIP | termios.INLCR | termios. IGNCR 
+    #              | termios.ICRNL | termios.IXON )
+    # oflag
+    #attrs[1] &= ~termios.OPOST
+    # cflag
+    #attrs[2] &= ~(termios.CSIZE | termios. PARENB)
+    #attrs[2] |= termios.CS8
+    # lflag
+    #attrs[3] &= ~(termios.ECHONL | termios.ECHO | termios.ICANON
+    #              | termios.ISIG | termios.IEXTEN)
+    #termios.tcsetattr(fd, termios.TCSANOW, attrs)
+    # turn off non-blocking
+    fcntl.fcntl(fd, fcntl.F_SETFL, flags_save & ~os.O_NONBLOCK)
+    # read a single keystroke
+    try:
+        ret = sys.stdin.read(1) # returns a single character
+    except KeyboardInterrupt: 
+        raise
+    finally:
+        # restore old state
+        #termios.tcsetattr(fd, termios.TCSAFLUSH, attrs_save)
+        fcntl.fcntl(fd, fcntl.F_SETFL, flags_save)
+    return ret
+
+# make stdin a non-blocking file
+fd = sys.stdin.fileno()
+fl = fcntl.fcntl(fd, fcntl.F_GETFL)
+fcntl.fcntl(fd, fcntl.F_SETFL, fl | os.O_NONBLOCK)
+
+retries = 300
+text = ""
+while retries:
+    try:
+        #out = select([sys.stdin], [], [], 1)
+        #print "select timeout"
+        #new_text = read_single_keypress()
+        #print "Key", new_text
+        try: new_text = sys.stdin.read(1)
+        except: continue
+        #print "Timeout", new_text
+        if new_text:
+            text += new_text
+            try: ready = text.index(" ")
+            except ValueError: continue
+            print "habla", text
+            client.speak(text[0:ready])
+            text = text[ready+1:]
+        sleep(0.1)
+        print "retries", retries
+        retries -= 1
+    except Exception as e:
+        print("Exiting...", e)
+        client.close()
+        break

@@ -1,0 +1,36 @@
+
+* (NO) Buscar el pin para stand-by del ratón, y soldarlo a donde sea.
+* Crear métodos para sacar la listas de devices
+* Crear método para sacar la lista de profiles
+* Crear método para sacar la lista de gestos
+* Terminar la clase Mapper
+* Grabar profiles (con el remapping)
+* Hacer la clase Matcher
+- Reconstruir la señal si no hay candidatos (usando codificadores redundantes y decodificadores como viternes)
+- mapper: Recorte de los gestos a partir del producto escalar
+    Por cada len(input_gestures) que sobren, recorta el sufijo
+    del evento que mas se repite
+* matcher: Sacar la longitud minima y maxima de los codigos
+* (NO) matcher: debe saber en cada momento, que opciones hay a partir de un slice de prefixes
+    Si el slice más largo posible no contiene ninguna opción:
+        Mirar si hay algun codigo que no es exacto pero se parece mucho, para
+        intentar corregirlo. Si el parecido es > 70% y el principio y final 
+        encajan, entonces corrige, si no descarta el primer prefijo
+    No continua mirando slices mas cortos en el momento que haya opciones
+    Si solo hay una opcion, usa el gesto y lo quita del buffer completamente
+- Cambiar el nombre del programa a gesturemapper
+* (NO) matcher: Discard or correct a code based on the similarity to the most similar
+
+- Usar nltk para el parseo de textos y extracción de histogramas
+- El mapper deberia tener tambien las herramientas de parseo y conversion a histograma de eventos
+- Dar la opcion al usuario de mapear acorde al histograma, orden o huffman codes
+- Listar los profiles en la pantalla principal, y el perfil por defecto para la config
+* Injectar eventos: crear device UInput con las capabilities del profile
+* get_all_gestures con el filtro por device, que devuelve sólo los eventos soportados por el device
+* Capturar los cambios en los eventos en una cola, tomando en cuenta los timeouts en los releases
+* Coger la lista de gestos soportados por un device (incluyendo los de segundo nivel no incluídos en el device)
+* Controller: Que abra el device y capture con start, y cierre con stop
+- GUI: Editar la dificultad de los gestos usados en un perfil
+- 
+- Seguir montando el GUI
+                                                                                                    

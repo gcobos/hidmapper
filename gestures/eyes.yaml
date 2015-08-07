@@ -1,0 +1,17 @@
+
+# List of gestures available for eyes. Feel free to implement your own!
+# Tap id's consist on WHO does WHAT over WHAT
+# NOTE: All gesture id's must be unique
+
+r_eye_blink:
+    name: "Right eye blinks"
+    icon: r_eye_blink.gif
+
+l_eye_blink:
+    name: "Left eye blinks"
+    icon: l_eye_blink.gif
+
+rl_eye_blink:
+    name: "Left and right eyes blinks at a time"
+    icon: rl_eye_blink.gif
+
