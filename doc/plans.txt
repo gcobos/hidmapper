@@ -1,0 +1,49 @@
+
+-----------------------
+
+The piezo is connecting both wires, and in parallel with piezos, a resistance to keep the button not pressed
+
+One of the wires on the piezo goes directly to the skin, and thumb is connected to VCC, so when the fingertips
+touch themselves, the pull-up resistor (through skin) goes down of the piezos goes down
+
+
+TODO: Hacer el injector de eventos específico para eventos que vengan del interfaz
+
+TODO: Hacer el programa en GTK para definir perfiles: 
+
+Tab 1: Profiles (por defecto)
+
+Muestra una lista de profiles creados, y por cada uno se puede seleccionar, y se activa.
+
+Tab 2: Setup
+
+En este tab se muestra el setup general, por ejemplo, cuánto tiempo entre pulsación doble se considera bueno
+También se muestra una lista de perfiles creados, con la opción de añadir uno nuevo.
+
+Si se elige crear un nuevo perfil, se muestra un input con el nombre del perfil, y un check para decir si es
+para el usuario logeado o para todos los usuarios. A continuación se muestra una lista de todos los gestos
+dibujados, con checkboxs por cada uno, para seleccionarlo o deseleccionarlo. Después se pulsa siguiente, y
+entonces se muestra la lista de gestos, ordenados por la dificultad por defecto, y da la opción, por cada
+gesto, de modificar la dificultad.
+
+Después se pulsa siguiente y se muestra otra pantalla que da la opción de escoger los eventos a generar,
+seleccionándolos de una lista con todas las letras, números, fonemas, puntuación, teclas de función, escape,
+eventos de ratón, etc. Y algunos eventos especiales, como click en cuadrante 1, 2, 3, 4, y cosas así,
+necesarias para algunos de los perfiles.
+Cada vez que un evento es seleccionado, se muestra un slider horizontal (de 0.00 a 100.00) con la frecuencia de uso,
+configurable. En esta fase, también se da la posibilidad de cargar un archivo para sacar el histograma. Los
+archivos pueden ser en texto plano o de xmacro (el programa tiene que identificarlos y parsearlos). En caso de
+que algunos de los eventos en el fichero cargado ya estén en en la selección actual, se suman después de ser
+convertidos a porcentajes. Después el resultado se vuelve a convertir de 0.00 a 100.00
+
+Pulsando finalizar, se muestra una última pantalla con los gestos asociados a cada evento, que han sido 
+generados automáticamente, y un botón finalizar, o volver atrás.
+
+Cuando se elige editar un perfil, es el mismo recorrido, así que quizá un asistente no sea tan buena idea si
+no me deja ir directamente a la fase que quiero editar
+
+Tab 3: Test
+
+En este tab se muestra una lista de gestos para cada evento en el perfil activo. Por cada uno, hay un indicador
+que se enciende en verde cada vez que se hace un evento correctamente. También hay una caja de texto que muestra
+los eventos (otra vez tienes que pensar en cómo poner eventos generales en texto y que sea standard)

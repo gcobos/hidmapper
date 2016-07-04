@@ -6,7 +6,7 @@
 * Terminar la clase Mapper
 * Grabar profiles (con el remapping)
 * Hacer la clase Matcher
-- Reconstruir la señal si no hay candidatos (usando codificadores redundantes y decodificadores como viternes)
+- Reconstruir la señal si no hay candidatos (usando codificadores redundantes y decodificadores como viterbi)
 - mapper: Recorte de los gestos a partir del producto escalar
     Por cada len(input_gestures) que sobren, recorta el sufijo
     del evento que mas se repite
