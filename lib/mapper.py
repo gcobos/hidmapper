@@ -73,16 +73,15 @@ class HIDMapper (object):
         htree = self.create_tree(len(gestures_difficulty), event_histogram)
         #print("Tree?", htree)
         nodes = self.walk_tree(htree)
-        
         #print("Nodes", nodes)
-        
+
         # Reorder codes by complexity
         codes = sorted(
-            nodes.values(), 
+            nodes.values(),
             key = lambda k: [len(k)]+k
         )
         #print("Ordered codes", codes)
-        
+
         # Get histogram of assigned codes
         code_hist = {}
         for i in codes:
@@ -93,17 +92,17 @@ class HIDMapper (object):
                     code_hist[j] = 1.0
         #print("prefix hist", code_hist)
         #print("Difficulties", gestures_difficulty)
-        
+
         # Reassign codes to maximize ease through all the codes
         sorted_code_hist = sorted(code_hist.iteritems(), key=operator.itemgetter(1), reverse = True)
         #print("Sorted histogram", list(sorted_code_hist))
-        
+
         # Reorder difficulties according to the code histogram
         #gestures_difficulty = sorted([d,  for d in enumerate(gestures_difficulty)])
-        
+
         lut = {code[0]:gestures_difficulty[i][1] for i, code in enumerate(sorted_code_hist)}
         #print("Translation table", lut)
-        
+
         easier_codes = []
         for code in codes:
             easier_codes.append([lut[prefix] for prefix in code])
@@ -111,12 +110,12 @@ class HIDMapper (object):
 
         #for i, code, easier_code in zip(sorted(event_histogram, reverse=True), codes, easier_codes):
         #    print('{}, {:5.2f}, {} after {}'.format(i[1], i[0], code, easier_code))
-        
+
         # Construct the mapping table
         mapping = {}
         for event, code in zip(sorted(event_histogram, reverse = True), easier_codes):
             mapping[event[1]] = code
-        
+
         #print "Mapping", mapping
         return mapping
 
@@ -170,12 +169,13 @@ if __name__=='__main__':
     freq = {
         'i': 7.46, 'f': 0.75, 'e': 14.13,'s':  9.61,
         'a': 12.31,'x': 0.74, 'o': 9.28, 'ch': 0.32,
-#        'u': 3.05, 'y': 0.69, 'p': 2.58, 'm': 2.62,
+        'u': 3.05, 'y': 0.69, 'p': 2.58, 'm': 2.62,
 #        't': 4.92, 'n': 7.78, 'k': 3.94, '~': 0.24,
 #        'b': 1.92, 'r': 6.19, 'd': 4.84, 'rr': 0.64,
 #        'g': 0.94, 'l': 5.05 
     }
     
-    mapper.remap(difficulties, freq)
+    print "Huffman", mapper.remap('huffman', difficulties, freq)
+    
     
     

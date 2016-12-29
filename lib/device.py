@@ -4,26 +4,26 @@ from itertools import chain
 class HIDMapperDevice (object):
 
     def __init__ (self, identifier):
-    
+
         self._identifier = identifier
-        
+
         self.name = None
         self.description = None
         self.author = None
         self.devices = None # Physical devices
         self.gestures = None
         #self.gestures_lut = None
-    
+
         # load the device given
         if self._identifier:
             self.load()
 
     def load (self):
-    
+
         conf = {}
         with open("conf/devices/%s.yaml" % self._identifier, 'r') as f:
             conf = yaml.safe_load(f)
-            
+
         # Set all properties from the device
         if conf.get('name'):
             self.name = conf.get('name')
@@ -36,8 +36,8 @@ class HIDMapperDevice (object):
         if conf.get('gestures'):
             self.gestures = conf.get('gestures')
 
-        return True        
-    
+        return True
+
     def save (self, save_as = None):
         """
             Save a device definition, optionally with another name
@@ -99,7 +99,5 @@ gestures: {gestures}
                     parent[tuple(i.split(':',i.count(':')-1))] = child
                     parent = child
                 child[tuple(event_names[-1].split(':',event_names[-1].count(':')-1))] = gesture
-            
         return lut
-        
-        
+
