@@ -1,9 +1,13 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 import gevent, sys, traceback
+
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject
 from lib.config import HIDMapperConfig
 from lib.profile import HIDMapperProfile
 from lib.controller import HIDMapperController
+
 
 """
     Show the gui or command line options with ---help
@@ -85,7 +89,7 @@ class HIDMapperGUI (object):
 
     def on_button_pressed(self, button):
         
-        print "Hello World!"
+        print("Hello World!")
 
     def _get_profiles_list (self):
         return sorted([(k, v.name or k.capitalize()) for k, v in self.profile.get_all_profiles().items()], key = lambda x: x[1])

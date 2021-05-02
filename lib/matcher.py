@@ -4,7 +4,7 @@ import yaml
 import time
 import itertools
 from difflib import get_close_matches
-from profile import HIDMapperProfile
+from lib.profile import HIDMapperProfile
 
 class Matcher (object):
 

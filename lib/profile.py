@@ -1,7 +1,6 @@
 import yaml, os, glob
-from device import HIDMapperDevice
-from mapper import HIDMapper
-from types import StringTypes
+from lib.device import HIDMapperDevice
+from lib.mapper import HIDMapper
 
 class HIDMapperProfile (object):
 
@@ -287,7 +286,7 @@ mapping:
         """
         components = set([])
         dep_tree = self._gestures_tree
-        if isinstance(gestures, StringTypes):
+        if isinstance(gestures, str):
             gestures = [gestures]
         for gesture in gestures: 
             children = dep_tree.get(gesture)

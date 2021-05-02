@@ -3,9 +3,9 @@ from gevent import spawn, sleep
 from collections import deque
 from gevent.select import select
 from evdev import InputDevice, list_devices, categorize, UInput, ecodes
-from device import HIDMapperDevice
-from profile import HIDMapperProfile
-from matcher import Matcher
+from lib.device import HIDMapperDevice
+from lib.profile import HIDMapperProfile
+from lib.matcher import Matcher
 
 class HIDMapperController (object):
 

@@ -36,7 +36,7 @@ class HIDMapper (object):
             code = codes.next()
             mapping[event] = list(code)
         
-        #print "Mapping", mapping
+        #print("Mapping", mapping)
         return mapping
             
     def remap_histogram (self, gestures, events):
@@ -53,7 +53,7 @@ class HIDMapper (object):
             code = codes.next()
             mapping[event] = list(code)
         
-        #print "Mapping", mapping
+        #print("Mapping", mapping)
         return mapping
 
     def remap_huffman (self, gestures, events):
@@ -116,7 +116,7 @@ class HIDMapper (object):
         for event, code in zip(sorted(event_histogram, reverse = True), easier_codes):
             mapping[event[1]] = code
 
-        #print "Mapping", mapping
+        #print("Mapping", mapping)
         return mapping
 
     def create_tree (self, num_gestures, freqs):
@@ -175,7 +175,7 @@ if __name__=='__main__':
 #        'g': 0.94, 'l': 5.05 
     }
     
-    print "Huffman", mapper.remap('huffman', difficulties, freq)
+    print("Huffman", mapper.remap('huffman', difficulties, freq))
     
     
     

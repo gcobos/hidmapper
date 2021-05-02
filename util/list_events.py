@@ -31,6 +31,6 @@ def list_event_names (codetype = None, event_code = 0):
     return events
 
 if __name__=='__main__':
-    #print ecodes.keys
+    #print(ecodes.keys)
     for name in list_event_names(): #ecodes.EV_KEY):
         print('    "'+name[0]+'": 0.0')
